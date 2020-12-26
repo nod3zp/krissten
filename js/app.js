@@ -20,36 +20,21 @@ function makeid(length) {
 
 let app = new Vue({
     el: '#app',
-    data() {
-        return {
-            disallowed: ['$', '.', ',', ':', ';', '?', '{', '}', '(', ')', '[', ']', '-', '+', '=', '/', '*', "'", '"', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ']
-        }
-    },
     methods: {
         encrypt: function()
         {
             var btn = document.querySelector('#btn');
             var input = document.querySelector('#in');
             var output = document.querySelector('#out');
-            var disCodes = [];
-            this.disallowed.forEach((i)=>{ disCodes.push(i.charCodeAt()) });
             
             var a = input.value;
-            var out = "";
             
-            for(let x = 0; x < a.length; x++)
-            {
-                var code = a[x].charCodeAt();
-                console.log(code + " : " + a[x] + " : " + str2touni(code.toString()));
-                if(!disCodes.includes(code))
-                {
-                    out += str2uni(code.toString());
-                } else {
-                    out += ` ${a[x]} `;
-                }
-            }
+            var strings = a.matchAll(/\"(.*?)\"/gi);
+            Array.from(strings).forEach((match)=>{
+                a = a.replace(match[1], str2uni(match[1]));
+            });
 
-            output.value = out;
+            output.value = a;
         }
     }
 });
