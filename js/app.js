@@ -31,7 +31,7 @@ let app = new Vue({
             
             var strings = a.matchAll(/\"(.*?)\"/gi);
             Array.from(strings).forEach((match)=>{
-                a = a.replace(match[1], str2uni(match[1]));
+                a = a.replace(/\"/ + match[1] +/\"/, str2uni(match[1]));
             });
 
             output.value = a;
