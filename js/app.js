@@ -40,6 +40,7 @@ let app = new Vue({
             for(let x = 0; x < a.length; x++)
             {
                 var code = a[x].charCodeAt();
+                console.log(code);
                 if(!disCodes.includes(code))
                 {
                     out += str2uni(code.toString());
